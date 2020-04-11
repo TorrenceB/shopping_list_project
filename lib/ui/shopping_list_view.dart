@@ -9,26 +9,38 @@ class ShoppingListView extends StatefulWidget {
 
 class _ShoppingListViewState extends State<ShoppingListView> {
   final List<ItemModel> _userItems = [
-    ItemModel(
-      isChecked: false,
-      amount: 5.69,
-      groceryItem: 'Frozen chicken',
-    ),
-    ItemModel(
-      isChecked: false,
-      amount: 5.69,
-      groceryItem: 'Frozen chicken',
-    ),
+    // ItemModel(
+    // isChecked: false,
+    // amount: 5.69,
+    // groceryItem: 'Frozen chicken',
+    // ),
+    // ItemModel(
+    // isChecked: false,
+    // amount: 2.52,
+    // groceryItem: 'Banannas',
+    // ),
   ];
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
-    return null;
+    final newItem = ItemModel(
+      amount: itemAmount,
+      groceryItem: item,
+    );
+    setState(() {
+      _userItems.add(newItem);
+    });
   }
 
   //Initiate bottom modal sheet
-  void _startAddNewItem() {
-    return null;
+  void _startAddNewItem(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            child: NewItem(_addNewItem),
+          );
+        });
   }
 
   @override
@@ -46,15 +58,27 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                 ),
               ),
             )
-          : ListView(
-              children: <Widget>[
-                _userItems,
-              ],
+          : ListView.builder(
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.all(5.0),
+                  child: Card(
+                    child: ListTile(
+                      leading: Icon(Icons.check_box),
+                      title: Center(
+                        child: Text(_userItems[index].groceryItem),
+                      ),
+                      trailing: Text(_userItems[index].amount.toString()),
+                    ),
+                  ),
+                );
+              },
+              itemCount: _userItems.length,
             ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          print('Add new item');
+          _startAddNewItem(context);
         },
       ),
     );
