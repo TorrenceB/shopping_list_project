@@ -5,5 +5,5 @@ class ItemModel {
   final String groceryItem;
   final double amount;
 
-  ItemModel(this.isChecked, this.groceryItem, this.amount);
+  ItemModel({this.isChecked, this.groceryItem, this.amount});
 }

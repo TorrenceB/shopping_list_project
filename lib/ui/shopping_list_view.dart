@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list_project/components/new_item.dart';
 import 'package:shopping_list_project/models/item_model.dart';
 
 class ShoppingListView extends StatefulWidget {
@@ -7,7 +8,28 @@ class ShoppingListView extends StatefulWidget {
 }
 
 class _ShoppingListViewState extends State<ShoppingListView> {
-  ItemModel item;
+  final List<ItemModel> _userItems = [
+    ItemModel(
+      isChecked: false,
+      amount: 5.69,
+      groceryItem: 'Frozen chicken',
+    ),
+    ItemModel(
+      isChecked: false,
+      amount: 5.69,
+      groceryItem: 'Frozen chicken',
+    ),
+  ];
+
+  //Method to add new item
+  void _addNewItem(String item, double itemAmount) {
+    return null;
+  }
+
+  //Initiate bottom modal sheet
+  void _startAddNewItem() {
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +37,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       appBar: AppBar(
         title: Text('Shopping list'),
       ),
-      body: item == null
+      body: _userItems.length == 0
           ? Center(
               child: Container(
                 child: Text(
@@ -26,31 +48,14 @@ class _ShoppingListViewState extends State<ShoppingListView> {
             )
           : ListView(
               children: <Widget>[
-                _buildItemContainer(),
+                _userItems,
               ],
             ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          print('Add grocery item');
+          print('Add new item');
         },
-      ),
-    );
-  }
-
-  Container _buildItemContainer() {
-    return Container(
-      padding: EdgeInsets.all(5.0),
-      child: Card(
-        child: ListTile(
-          leading: item.isChecked
-              ? Icon(Icons.check_box)
-              : Icon(Icons.check_box_outline_blank),
-          title: Center(
-            child: Text(item.groceryItem),
-          ),
-          trailing: Text(item.amount.toString()),
-        ),
       ),
     );
   }
