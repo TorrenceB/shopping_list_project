@@ -15,17 +15,14 @@ class _NewItemState extends State<NewItem> {
   TextEditingController amtController = TextEditingController();
 
   void submitData() {
-    final enteredItem = itemController.text;
-    final enteredAmount = double.parse(amtController.text);
-
-    if (enteredItem.isEmpty) {
-      return;
-    }
+    String enteredItem = itemController.text;
+    double enteredAmount = double.tryParse(amtController.text) ?? 0.0;
 
     widget.addNewItm(
       enteredItem,
       enteredAmount,
     );
+
     Navigator.of(context).pop();
   }
 

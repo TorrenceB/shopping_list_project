@@ -25,6 +25,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       amount: itemAmount,
       groceryItem: item,
     );
+    
     setState(() {
       _userItems.add(newItem);
     });
