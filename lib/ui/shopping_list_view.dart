@@ -10,14 +10,12 @@ class ShoppingListView extends StatefulWidget {
 class _ShoppingListViewState extends State<ShoppingListView> {
   final List<ItemModel> _userItems = [
     // ItemModel(
-    // isChecked: false,
-    // amount: 5.69,
-    // groceryItem: 'Frozen chicken',
+    //   amount: 5.69,
+    //   groceryItem: 'Frozen chicken',
     // ),
     // ItemModel(
-    // isChecked: false,
-    // amount: 2.52,
-    // groceryItem: 'Banannas',
+    //   amount: 2.52,
+    //   groceryItem: 'Banannas',
     // ),
   ];
 
