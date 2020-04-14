@@ -8,16 +8,7 @@ class ShoppingListView extends StatefulWidget {
 }
 
 class _ShoppingListViewState extends State<ShoppingListView> {
-  final List<ItemModel> _userItems = [
-    // ItemModel(
-    //   amount: 5.69,
-    //   groceryItem: 'Frozen chicken',
-    // ),
-    // ItemModel(
-    //   amount: 2.52,
-    //   groceryItem: 'Banannas',
-    // ),
-  ];
+  final List<ItemModel> _userItems = [];
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
@@ -25,7 +16,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       amount: itemAmount,
       groceryItem: item,
     );
-    
+
     setState(() {
       _userItems.add(newItem);
     });
@@ -63,7 +54,14 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                   padding: EdgeInsets.all(5.0),
                   child: Card(
                     child: ListTile(
-                      leading: Icon(Icons.check_box),
+                      leading: Checkbox(
+                        value: _userItems[index].isSelected,
+                        onChanged: (bool val) {
+                          setState(() {
+                            _userItems[index].isSelected = val;
+                          });
+                        },
+                      ),
                       title: Center(
                         child: Text(_userItems[index].groceryItem),
                       ),
