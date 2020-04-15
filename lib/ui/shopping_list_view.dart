@@ -9,6 +9,7 @@ class ShoppingListView extends StatefulWidget {
 
 class _ShoppingListViewState extends State<ShoppingListView> {
   final List<ItemModel> _userItems = [];
+  double sum = 0.0;
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
@@ -25,12 +26,21 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   //Initiate bottom modal sheet
   void _startAddNewItem(BuildContext ctx) {
     showModalBottomSheet(
-        context: ctx,
-        builder: (_) {
-          return GestureDetector(
-            child: NewItem(_addNewItem),
-          );
-        });
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          child: NewItem(_addNewItem),
+        );
+      },
+    );
+  }
+
+  //Method to add total
+  void _addTotalCost() {
+    for (var i = 0; i < _userItems.length; i++) {
+      sum += _userItems[i].amount;
+    }
+    print('Total cost: $sum');
   }
 
   @override
@@ -97,32 +107,29 @@ class _ShoppingListViewState extends State<ShoppingListView> {
     return Row(
       children: <Widget>[
         Expanded(
-          child: Card(
-            elevation: 10.0,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-              ),
-              padding: EdgeInsets.all(50.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Total',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+            ),
+            padding: EdgeInsets.all(50.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Total',
+                    style: TextStyle(fontSize: 20.0),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text(
-                      '\$45.00',
-                      style: TextStyle(fontSize: 35.0),
-                    ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text(
+                    '\$${sum.toStringAsFixed(2)}',
+                    style: TextStyle(fontSize: 35.0),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
