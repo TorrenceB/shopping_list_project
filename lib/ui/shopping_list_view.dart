@@ -48,29 +48,13 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                 ),
               ),
             )
-          : ListView.builder(
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.all(5.0),
-                  child: Card(
-                    child: ListTile(
-                      leading: Checkbox(
-                        value: _userItems[index].isSelected,
-                        onChanged: (bool val) {
-                          setState(() {
-                            _userItems[index].isSelected = val;
-                          });
-                        },
-                      ),
-                      title: Center(
-                        child: Text(_userItems[index].groceryItem),
-                      ),
-                      trailing: Text('\$${_userItems[index].amount.toStringAsFixed(2)}'),
-                    ),
-                  ),
-                );
-              },
-              itemCount: _userItems.length,
+          : Column(
+              children: <Widget>[
+                Expanded(
+                  child: _buildItemTile(),
+                ),
+                _buildTotalCard(),
+              ],
             ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -78,6 +62,71 @@ class _ShoppingListViewState extends State<ShoppingListView> {
           _startAddNewItem(context);
         },
       ),
+    );
+  }
+
+  ListView _buildItemTile() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Container(
+          padding: EdgeInsets.all(3.0),
+          child: Card(
+            child: ListTile(
+              leading: Checkbox(
+                value: _userItems[index].isSelected,
+                onChanged: (bool val) {
+                  setState(() {
+                    _userItems[index].isSelected = val;
+                  });
+                },
+              ),
+              title: Center(
+                child: Text(_userItems[index].groceryItem),
+              ),
+              trailing:
+                  Text('\$${_userItems[index].amount.toStringAsFixed(2)}'),
+            ),
+          ),
+        );
+      },
+      itemCount: _userItems.length,
+    );
+  }
+
+  Row _buildTotalCard() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Card(
+            elevation: 10.0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+              ),
+              padding: EdgeInsets.all(50.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Total',
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      '\$45.00',
+                      style: TextStyle(fontSize: 35.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
