@@ -20,6 +20,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
 
     setState(() {
       _userItems.add(newItem);
+      _addTotalCost();
     });
   }
 
