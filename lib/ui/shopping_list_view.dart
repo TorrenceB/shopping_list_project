@@ -65,7 +65,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                       title: Center(
                         child: Text(_userItems[index].groceryItem),
                       ),
-                      trailing: Text(_userItems[index].amount.toString()),
+                      trailing: Text('\$${_userItems[index].amount.toStringAsFixed(2)}'),
                     ),
                   ),
                 );

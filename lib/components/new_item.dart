@@ -18,6 +18,10 @@ class _NewItemState extends State<NewItem> {
     String enteredItem = itemController.text;
     double enteredAmount = double.tryParse(amtController.text) ?? 0.0;
 
+    if(enteredItem.isEmpty) {
+      return;
+    }
+
     widget.addNewItm(
       enteredItem,
       enteredAmount,
