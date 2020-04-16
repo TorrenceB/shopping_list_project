@@ -10,6 +10,7 @@ class ShoppingListView extends StatefulWidget {
 class _ShoppingListViewState extends State<ShoppingListView> {
   static List<ItemModel> _userItems = [];
   static var sum = 0.0;
+  bool _isEditing = false;
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
@@ -21,7 +22,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
     setState(() {
       _userItems.add(newItem);
     });
-       _addTotalCost();
+    _addTotalCost();
   }
 
   //Initiate bottom modal sheet
@@ -82,23 +83,26 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   ListView _buildItemTile() {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return Container(
-          padding: EdgeInsets.all(3.0),
-          child: Card(
-            child: ListTile(
-              leading: Checkbox(
-                value: _userItems[index].isSelected,
-                onChanged: (bool val) {
-                  setState(() {
-                    _userItems[index].isSelected = val;
-                  });
-                },
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: EdgeInsets.all(3.0),
+            child: Card(
+              child: ListTile(
+                leading: Checkbox(
+                  value: _userItems[index].isSelected,
+                  onChanged: (bool val) {
+                    setState(() {
+                      _userItems[index].isSelected = val;
+                    });
+                  },
+                ),
+                title: Center(
+                  child: Text(_userItems[index].groceryItem),
+                ),
+                trailing:
+                    Text('\$${_userItems[index].amount.toStringAsFixed(2)}'),
               ),
-              title: Center(
-                child: Text(_userItems[index].groceryItem),
-              ),
-              trailing:
-                  Text('\$${_userItems[index].amount.toStringAsFixed(2)}'),
             ),
           ),
         );
