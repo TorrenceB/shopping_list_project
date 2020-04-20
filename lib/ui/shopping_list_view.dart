@@ -10,7 +10,6 @@ class ShoppingListView extends StatefulWidget {
 class _ShoppingListViewState extends State<ShoppingListView> {
   static List<ItemModel> _userItems = [];
   static var sum = 0.0;
-  bool _isEditing = false;
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
@@ -46,6 +45,18 @@ class _ShoppingListViewState extends State<ShoppingListView> {
     setState(() {
       sum = tempSum;
     });
+  }
+
+  void _handleEdit(int index) {
+    final updatedItem = ItemModel(
+      amount: _userItems[index].amount,
+      groceryItem: _userItems[index].groceryItem,
+      isEditing: true,
+    );
+    setState(() {
+      _userItems[index] = updatedItem;
+    });
+    print(updatedItem);
   }
 
   @override
@@ -84,7 +95,9 @@ class _ShoppingListViewState extends State<ShoppingListView> {
     return ListView.builder(
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            _handleEdit(index);
+          },
           child: Container(
             padding: EdgeInsets.all(3.0),
             child: Card(
