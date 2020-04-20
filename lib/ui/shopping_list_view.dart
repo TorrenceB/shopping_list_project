@@ -21,6 +21,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
     setState(() {
       _userItems.add(newItem);
     });
+    print(_userItems);
     _addTotalCost();
   }
 
@@ -34,6 +35,23 @@ class _ShoppingListViewState extends State<ShoppingListView> {
         );
       },
     );
+  }
+
+  //Method to update data
+  void handleEdit(int index) {
+    final currentState = ItemModel(
+      amount: _userItems[index].amount,
+      groceryItem: _userItems[index].groceryItem,
+      isEditing: true,
+    );
+    setState(() {
+      _userItems[index] = currentState;
+    });
+    print(currentState);
+  }
+
+  void handleUpdate(BuildContext ctx) {
+    
   }
 
   // Method to add total
