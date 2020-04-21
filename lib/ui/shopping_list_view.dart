@@ -8,21 +8,27 @@ class ShoppingListView extends StatefulWidget {
 }
 
 class _ShoppingListViewState extends State<ShoppingListView> {
-  static List<ItemModel> _userItems = [];
+  List<ItemModel> _userItems = [];
   static var sum = 0.0;
 
   //Method to add new item
-  void _addNewItem(String item, double itemAmount) {
-    final newItem = ItemModel(
-      amount: itemAmount,
-      groceryItem: item,
-    );
+  // void _addNewItem(String item, double itemAmount) {
+  //   final newItem = ItemModel(
+  //     amount: itemAmount,
+  //     groceryItem: item,
+  //   );
 
-    setState(() {
-      _userItems.add(newItem);
-    });
-    print(_userItems);
-    _addTotalCost();
+  //   setState(() {
+  //     _userItems.add(newItem);
+  //   });
+  //   print(_userItems);
+  //   _addTotalCost();
+  // }
+
+  void _addNewItem(ItemModel item) {
+    List<ItemModel> items = this._userItems;
+    items.add(item);
+    setState(() => this._userItems = items);
   }
 
   //Initiate bottom modal sheet
@@ -50,9 +56,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
     print(currentState);
   }
 
-  void handleUpdate(BuildContext ctx) {
-    
-  }
+  void handleUpdate(BuildContext ctx) {}
 
   // Method to add total
   void _addTotalCost() {

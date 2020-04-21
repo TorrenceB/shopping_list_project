@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list_project/models/item_model.dart';
 
-class NewItem extends StatefulWidget {
-  final Function addNewItm;
+import '../models/item_model.dart';
 
-  NewItem(this.addNewItm);
+class NewItem extends StatefulWidget {
+  final Function addNewItem;
+
+  NewItem(this.addNewItem);
 
   @override
   _NewItemState createState() => _NewItemState();
@@ -22,10 +24,12 @@ class _NewItemState extends State<NewItem> {
       return;
     }
 
-    widget.addNewItm(
-      enteredItem,
-      enteredAmount,
+    ItemModel newItem = ItemModel(
+      groceryItem: enteredItem,
+      amount: enteredAmount,
     );
+
+    widget.addNewItem(newItem);
 
     Navigator.of(context).pop();
   }
