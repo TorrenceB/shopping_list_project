@@ -7,10 +7,10 @@ class NewItem extends StatefulWidget {
   NewItem(this.addNewItm);
 
   @override
-  _NewItemState createState() => _NewItemState();
+  NewItemState createState() => NewItemState();
 }
 
-class _NewItemState extends State<NewItem> {
+class NewItemState extends State<NewItem> {
   TextEditingController itemController = TextEditingController();
   TextEditingController amtController = TextEditingController();
 
@@ -28,6 +28,14 @@ class _NewItemState extends State<NewItem> {
     );
 
     Navigator.of(context).pop();
+  }
+
+  void editData() {
+    
+  }
+
+  void _printValue() {
+    print('Current value: ${itemController.text}');
   }
 
   @override
