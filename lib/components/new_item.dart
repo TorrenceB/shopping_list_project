@@ -35,25 +35,6 @@ class NewItemState extends State<NewItem> {
     print('Current value: ${itemController.text}');
   }
 
-  Widget _editTitleTextField() {
-    if (item.isEditing == false) {
-      return TextField(
-          controller: itemController,
-          decoration: InputDecoration(labelText: 'Item'),
-          onSubmitted: (newValue) {
-            setState(() {
-              item.groceryItem = newValue;
-              item.isEditing = false;
-            });
-          });
-    } else {
-      return TextField(
-        controller: itemController,
-        onSubmitted: (_) => submitData(),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -62,12 +43,16 @@ class NewItemState extends State<NewItem> {
         padding: EdgeInsets.all(35.0),
         child: Column(
           children: <Widget>[
-            _editTitleTextField(),
-            // TextField(
-            //   controller: amtController,
-            //   decoration: InputDecoration(labelText: 'Amount'),
-            //   onSubmitted: (_) => submitData(),
-            // ),
+            TextField(
+              controller: itemController,
+              decoration: InputDecoration(labelText: 'Item'),
+              onSubmitted: (_) => submitData(),
+            ),
+            TextField(
+              controller: amtController,
+              decoration: InputDecoration(labelText: 'Amount'),
+              onSubmitted: (_) => submitData(),
+            ),
             Container(
               padding: EdgeInsets.all(20.0),
               child: RaisedButton(
