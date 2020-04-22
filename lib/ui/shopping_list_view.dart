@@ -38,17 +38,20 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   }
 
   //Method to update data
-  void _handleEdit(int index) {
+  void handleEdit(int index) {
     final currentState = ItemModel(
       amount: _userItems[index].amount,
       groceryItem: _userItems[index].groceryItem,
-      isSelected: _userItems[index].isSelected,
       isEditing: true,
     );
     setState(() {
       _userItems[index] = currentState;
     });
     print(currentState);
+  }
+
+  void handleUpdate(BuildContext ctx) {
+    
   }
 
   // Method to add total
@@ -60,6 +63,18 @@ class _ShoppingListViewState extends State<ShoppingListView> {
     setState(() {
       sum = tempSum;
     });
+  }
+
+  void _handleEdit(int index) {
+    final updatedItem = ItemModel(
+      amount: _userItems[index].amount,
+      groceryItem: _userItems[index].groceryItem,
+      isEditing: true,
+    );
+    setState(() {
+      _userItems[index] = updatedItem;
+    });
+    print(updatedItem);
   }
 
   @override
@@ -99,7 +114,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            // _handleEdit(index);
+            _handleEdit(index);
           },
           child: Container(
             padding: EdgeInsets.all(3.0),

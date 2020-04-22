@@ -7,10 +7,10 @@ class NewItem extends StatefulWidget {
   NewItem(this.addNewItm);
 
   @override
-  NewItemState createState() => NewItemState();
+  _NewItemState createState() => _NewItemState();
 }
 
-class NewItemState extends State<NewItem> {
+class _NewItemState extends State<NewItem> {
   TextEditingController itemController = TextEditingController();
   TextEditingController amtController = TextEditingController();
   ItemModel item;
