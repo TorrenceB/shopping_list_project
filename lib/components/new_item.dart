@@ -13,6 +13,7 @@ class NewItem extends StatefulWidget {
 class NewItemState extends State<NewItem> {
   TextEditingController itemController = TextEditingController();
   TextEditingController amtController = TextEditingController();
+  ItemModel item;
 
   void submitData() {
     String enteredItem = itemController.text;
@@ -30,12 +31,27 @@ class NewItemState extends State<NewItem> {
     Navigator.of(context).pop();
   }
 
-  void editData() {
-    
-  }
-
   void _printValue() {
     print('Current value: ${itemController.text}');
+  }
+
+  Widget _editTitleTextField() {
+    if (item.isEditing == false) {
+      return TextField(
+          controller: itemController,
+          decoration: InputDecoration(labelText: 'Item'),
+          onSubmitted: (newValue) {
+            setState(() {
+              item.groceryItem = newValue;
+              item.isEditing = false;
+            });
+          });
+    } else {
+      return TextField(
+        controller: itemController,
+        onSubmitted: (_) => submitData(),
+      );
+    }
   }
 
   @override
@@ -46,16 +62,12 @@ class NewItemState extends State<NewItem> {
         padding: EdgeInsets.all(35.0),
         child: Column(
           children: <Widget>[
-            TextField(
-              controller: itemController,
-              decoration: InputDecoration(labelText: 'Item'),
-              onSubmitted: (_) => submitData(),
-            ),
-            TextField(
-              controller: amtController,
-              decoration: InputDecoration(labelText: 'Amount'),
-              onSubmitted: (_) => submitData(),
-            ),
+            _editTitleTextField(),
+            // TextField(
+            //   controller: amtController,
+            //   decoration: InputDecoration(labelText: 'Amount'),
+            //   onSubmitted: (_) => submitData(),
+            // ),
             Container(
               padding: EdgeInsets.all(20.0),
               child: RaisedButton(
