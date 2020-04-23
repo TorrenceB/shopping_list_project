@@ -5,6 +5,7 @@ class ItemModel {
   double amount;
   bool isSelected = false;
   bool isEditing = false;
+  
 
   ItemModel(
       {this.groceryItem, this.amount, this.isSelected = false, this.isEditing});
