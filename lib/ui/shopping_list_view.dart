@@ -10,6 +10,7 @@ class ShoppingListView extends StatefulWidget {
 class _ShoppingListViewState extends State<ShoppingListView> {
   static List<ItemModel> _userItems = [];
   static var sum = 0.0;
+  bool _isEditing = false;
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
@@ -50,20 +51,26 @@ class _ShoppingListViewState extends State<ShoppingListView> {
 
 //Method to get current state
   void _handleEdit(int index) {
-    final updatedItem = ItemModel(
-      amount: _userItems[index].amount,
-      groceryItem: _userItems[index].groceryItem,
-      isEditing: true,
-    );
+    print('Passed callback!');
+    // final updatedItem = ItemModel(
+    //   amount: _userItems[index].amount,
+    //   groceryItem: _userItems[index].groceryItem,
+    // );
 
-    setState(() {
-      _userItems[index] = updatedItem;
-    });
-    print(updatedItem);
+    // setState(() {
+    //   _userItems[index] = updatedItem;
+    // });
+    // print(updatedItem);
   }
 
-  void _handleUpdate() {
-    
+  void _startHandleEdit(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return GestureDetector(
+            child: NewItem(_handleEdit, displayModal: _isEditing,)
+          );
+        });
   }
 
   @override
@@ -103,7 +110,10 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            _handleEdit(index);
+            _startHandleEdit(context);
+            setState(() {
+              _isEditing = true;
+            });
           },
           child: Container(
             padding: EdgeInsets.all(3.0),

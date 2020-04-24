@@ -4,18 +4,18 @@ class ItemModel {
   String groceryItem;
   double amount;
   bool isSelected = false;
-  bool isEditing = false;
-  
 
-  ItemModel(
-      {this.groceryItem, this.amount, this.isSelected = false, this.isEditing});
+  ItemModel({
+    this.groceryItem,
+    this.amount,
+    this.isSelected = false,
+  });
 
   String toString() => '''
 
   groceryItem: $groceryItem,
   amount: $amount,
   isSelected: $isSelected,
-  isEditing: $isEditing,
 
   ''';
 }
