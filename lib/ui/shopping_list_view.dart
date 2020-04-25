@@ -32,7 +32,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       context: ctx,
       builder: (_) {
         return GestureDetector(
-          child: NewItem(_addNewItem),
+          child: NewItem(addNewItm: _addNewItem),
         );
       },
     );
@@ -50,27 +50,37 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   }
 
 //Method to get current state
-  void _handleEdit(int index) {
-    print('Passed callback!');
-    // final updatedItem = ItemModel(
-    //   amount: _userItems[index].amount,
-    //   groceryItem: _userItems[index].groceryItem,
-    // );
+  // void _handleEdit(int index) {
+  //   print('Current object');
+  //   final updatedItem = ItemModel(
+  //     amount: _userItems[index].amount,
+  //     groceryItem: _userItems[index].groceryItem,
+  //   );
 
-    // setState(() {
-    //   _userItems[index] = updatedItem;
-    // });
-    // print(updatedItem);
-  }
+  //   setState(() {
+  //     _userItems[index] = updatedItem;
+  //   });
+  //   print(updatedItem);
+  // }
+
+  // void _editOldItem() {
+  //   setState(() {
+      
+  //   });
+  // }
 
   void _startHandleEdit(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (_) {
-          return GestureDetector(
-            child: NewItem(_handleEdit, displayModal: _isEditing,)
-          );
-        });
+      context: context,
+      builder: (_) {
+        return GestureDetector(
+          child: NewItem(
+            // editItm: _editOldItem,
+            displayModal: _isEditing,
+          ),
+        );
+      },
+    );
   }
 
   @override
