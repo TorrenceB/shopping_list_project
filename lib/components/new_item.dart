@@ -49,12 +49,7 @@ class _NewItemState extends State<NewItem> {
   void editData() {
     String enteredItem = itemController.text;
 
-    ItemModel updatedItem = ItemModel(
-      groceryItem: enteredItem,
-    );
-
-    widget.editItm(updatedItem);
-    print(updatedItem);
+    
   }
 
   @override
@@ -76,7 +71,7 @@ class _NewItemState extends State<NewItem> {
         TextField(
           controller: itemController,
           decoration: InputDecoration(labelText: 'Item'),
-          onSubmitted: (_) => editData(),
+          onChanged: null,
         ),
         // TextField(
         //   controller: amtController,
@@ -88,7 +83,7 @@ class _NewItemState extends State<NewItem> {
           child: RaisedButton(
             padding: EdgeInsets.all(15.0),
             child: Text('Edit item'),
-            onPressed: editData,
+            onPressed: () => null,
           ),
         ),
       ],
