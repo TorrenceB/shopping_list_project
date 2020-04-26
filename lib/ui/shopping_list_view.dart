@@ -50,16 +50,16 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   }
 
 //Method to get current state
-  void _handleEdit(int index) {
-    print('Current object');
-    final updatedItem = ItemModel(
-      groceryItem: _userItems[index].groceryItem,
+  void _handleEdit() {
+    ItemModel newItem = ItemModel(
+      groceryItem: 'Eggs',
+      amount: 23,
     );
-
     setState(() {
-      _userItems[index] = updatedItem;
+      _userItems[0] = newItem;
     });
-    print(updatedItem);
+    print(_userItems[0]);
+    _addTotalCost();
   }
 
   void _startHandleEdit(BuildContext context) {
@@ -68,7 +68,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       builder: (_) {
         return GestureDetector(
           child: NewItem(
-            editItm: null,
+            editItm: _handleEdit,
             displayModal: _isEditing,
           ),
         );

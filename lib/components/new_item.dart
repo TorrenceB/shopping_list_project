@@ -46,12 +46,6 @@ class _NewItemState extends State<NewItem> {
     Navigator.of(context).pop();
   }
 
-  void editData() {
-    String enteredItem = itemController.text;
-
-    
-  }
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -64,26 +58,22 @@ class _NewItemState extends State<NewItem> {
   }
 
   Column _buildEditItem() {
-    // double enteredAmt = double.tryParse(amtController.text);
-
     return Column(
       children: <Widget>[
         TextField(
           controller: itemController,
           decoration: InputDecoration(labelText: 'Item'),
-          onChanged: null,
         ),
-        // TextField(
-        //   controller: amtController,
-        //   decoration: InputDecoration(labelText: 'Amount'),
-        //   onSubmitted: () =>
-        // ),
+        TextField(
+          controller: amtController,
+          decoration: InputDecoration(labelText: 'Amount'),
+        ),
         Container(
           padding: EdgeInsets.all(20.0),
           child: RaisedButton(
             padding: EdgeInsets.all(15.0),
             child: Text('Edit item'),
-            onPressed: () => null,
+            onPressed: widget.editItm,
           ),
         ),
       ],
