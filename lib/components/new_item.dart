@@ -5,8 +5,13 @@ class NewItem extends StatefulWidget {
   final Function addNewItm;
   final Function editItm;
   final bool displayModal;
+  ItemModel currentItem;
 
-  NewItem({this.addNewItm, this.editItm, this.displayModal = false});
+  NewItem(
+      {this.addNewItm,
+      this.editItm,
+      this.displayModal = false,
+      this.currentItem});
 
   @override
   _NewItemState createState() => _NewItemState();
@@ -19,16 +24,20 @@ class _NewItemState extends State<NewItem> {
   void initState() {
     super.initState();
     itemController.addListener(_currentItmText);
-    // amtController.addListener(_currentAmtValue);
+    amtController.addListener(_currentAmtValue);
+    if (widget.currentItem != null) {
+      itemController.text = widget.currentItem.groceryItem;
+      amtController.text = widget.currentItem.amount as String;
+    }
   }
 
   void _currentItmText() {
     print('Current item value: ${itemController.text}');
   }
 
-  // void _currentAmtValue() {
-  //   print('Current amount value: ${double.tryParse(amtController.text)}');
-  // }
+  void _currentAmtValue() {
+    print('Current amount value: ${double.tryParse(amtController.text)}');
+  }
 
   void submitData() {
     String enteredItem = itemController.text;
@@ -58,6 +67,7 @@ class _NewItemState extends State<NewItem> {
   }
 
   Column _buildEditItem() {
+    print('Current Item: ${widget.currentItem}');
     return Column(
       children: <Widget>[
         TextField(
@@ -71,10 +81,12 @@ class _NewItemState extends State<NewItem> {
         Container(
           padding: EdgeInsets.all(20.0),
           child: RaisedButton(
-            padding: EdgeInsets.all(15.0),
-            child: Text('Edit item'),
-            onPressed: widget.editItm,
-          ),
+              padding: EdgeInsets.all(15.0),
+              child: Text('Edit item'),
+              onPressed: () {
+                widget.currentItem.groceryItem = itemController.text;
+                widget.editItm(item: widget.currentItem);
+              }),
         ),
       ],
     );

@@ -11,6 +11,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   static List<ItemModel> _userItems = [];
   static var sum = 0.0;
   bool _isEditing = false;
+  ItemModel _currentItemEditing;
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
@@ -50,24 +51,25 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   }
 
 //Method to get current state
-  void _handleEdit() {
-    ItemModel newItem = ItemModel(
-      groceryItem: 'Eggs',
-      amount: 23,
-    );
+  void _handleEdit({ItemModel item}) {
+    print('_handleEdit running... : $item');
+
     setState(() {
-      _userItems[0] = newItem;
+      _userItems[0] = item;
     });
     print(_userItems[0]);
     _addTotalCost();
+
+    Navigator.of(context).pop();
   }
 
-  void _startHandleEdit(BuildContext context) {
+  void _startHandleEdit(BuildContext context, ItemModel item) {
     showModalBottomSheet(
       context: context,
       builder: (_) {
         return GestureDetector(
           child: NewItem(
+            currentItem: item,
             editItm: _handleEdit,
             displayModal: _isEditing,
           ),
@@ -113,10 +115,11 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            _startHandleEdit(context);
             setState(() {
               _isEditing = true;
+              this._currentItemEditing = _userItems[index];
             });
+            _startHandleEdit(context, this._currentItemEditing);
           },
           child: Container(
             padding: EdgeInsets.all(3.0),
