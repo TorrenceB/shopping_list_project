@@ -14,8 +14,8 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   static var sum = 0.0;
   bool _isEditing = false;
   ItemModel _currentItemEditing;
-  Color primaryTheme = const Color(0xffFB0538);
-  Color secondaryTheme = const Color(0xff20a747);
+  Color primaryTheme = const Color(0xff072A24);
+  Color secondaryTheme = const Color(0xff9BCFB8);
 
   //Method to add new item
   void _addNewItem(String item, double itemAmount) {
@@ -129,7 +129,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
             padding: EdgeInsets.all(3.0),
             child: Card(
               color: secondaryTheme,
-              elevation: 5,
+              elevation: 6,
               child: ListTile(
                 leading: Theme(
                   data: Theme.of(context).copyWith(
@@ -150,12 +150,12 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                   child: Text(
                     _userItems[index].groceryItem,
                     style:
-                        GoogleFonts.bangers(color: Colors.white, fontSize: 18),
+                        GoogleFonts.bangers(color: Colors.white, fontSize: 20),
                   ),
                 ),
                 trailing: Text(
                   '\$${_userItems[index].amount.toStringAsFixed(2)}',
-                  style: GoogleFonts.bangers(color: Colors.white, fontSize: 18),
+                  style: GoogleFonts.bangers(color: Colors.white, fontSize: 20),
                 ),
               ),
             ),
@@ -172,7 +172,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.grey[200],
             ),
             padding: EdgeInsets.all(50.0),
             child: Column(
