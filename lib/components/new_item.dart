@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_list_project/models/item_model.dart';
 
 class NewItem extends StatefulWidget {
@@ -27,7 +28,7 @@ class _NewItemState extends State<NewItem> {
     amtController.addListener(_currentAmtValue);
     if (widget.currentItem != null) {
       itemController.text = widget.currentItem.groceryItem;
-      amtController.text = widget.currentItem.amount as String;
+      amtController.text = '${widget.currentItem.amount.toStringAsFixed(0)}';
     }
   }
 
@@ -72,19 +73,26 @@ class _NewItemState extends State<NewItem> {
       children: <Widget>[
         TextField(
           controller: itemController,
-          decoration: InputDecoration(labelText: 'Item'),
+          decoration: InputDecoration(
+              labelText: 'Item', labelStyle: GoogleFonts.bangers()),
         ),
         TextField(
           controller: amtController,
-          decoration: InputDecoration(labelText: 'Amount'),
+          decoration: InputDecoration(
+            labelText: 'Amount',
+            labelStyle: GoogleFonts.bangers(),
+          ),
         ),
         Container(
           padding: EdgeInsets.all(20.0),
           child: RaisedButton(
               padding: EdgeInsets.all(15.0),
-              child: Text('Edit item'),
+              child: Text(
+                'Edit item', style: GoogleFonts.bangers(),
+              ),
               onPressed: () {
                 widget.currentItem.groceryItem = itemController.text;
+                widget.currentItem.amount = double.parse(amtController.text);
                 widget.editItm(item: widget.currentItem);
               }),
         ),
@@ -97,19 +105,25 @@ class _NewItemState extends State<NewItem> {
       children: <Widget>[
         TextField(
           controller: itemController,
-          decoration: InputDecoration(labelText: 'Item'),
+          decoration: InputDecoration(
+            labelText: 'Item',
+            labelStyle: GoogleFonts.bangers(),
+          ),
           onSubmitted: (_) => submitData(),
         ),
         TextField(
           controller: amtController,
-          decoration: InputDecoration(labelText: 'Amount'),
+          decoration: InputDecoration(
+            labelText: 'Amount',
+            labelStyle: GoogleFonts.bangers(),
+          ),
           onSubmitted: (_) => submitData(),
         ),
         Container(
           padding: EdgeInsets.all(20.0),
           child: RaisedButton(
             padding: EdgeInsets.all(15.0),
-            child: Text('Add item'),
+            child: Text('Add item', style: GoogleFonts.bangers(),),
             onPressed: submitData,
           ),
         ),

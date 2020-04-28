@@ -14,9 +14,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: _buildMaterialApp(),
     );
   }
@@ -25,7 +22,7 @@ class _MyAppState extends State<MyApp> {
 MaterialApp _buildMaterialApp() {
   return MaterialApp(
     routes: {
-      '/' : (BuildContext context) => ShoppingListView(),
+      '/': (BuildContext context) => ShoppingListView(),
     },
   );
 }
