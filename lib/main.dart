@@ -14,6 +14,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: _buildMaterialApp(),
     );
   }
@@ -21,6 +22,7 @@ class _MyAppState extends State<MyApp> {
 
 MaterialApp _buildMaterialApp() {
   return MaterialApp(
+    debugShowCheckedModeBanner: false,
     routes: {
       '/': (BuildContext context) => ShoppingListView(),
     },
