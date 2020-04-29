@@ -61,6 +61,7 @@ class _NewItemState extends State<NewItem> {
     return Card(
       elevation: 5,
       child: Container(
+        color: Colors.white,
         padding: EdgeInsets.all(35.0),
         child: widget.displayModal ? _buildEditItem() : _buildAddNewItem(),
       ),
@@ -74,21 +75,25 @@ class _NewItemState extends State<NewItem> {
         TextField(
           controller: itemController,
           decoration: InputDecoration(
-              labelText: 'Item', labelStyle: GoogleFonts.bangers()),
+            labelText: 'Item',
+            labelStyle: GoogleFonts.bangers(color: Colors.black, fontSize: 20),
+          ),
         ),
         TextField(
           controller: amtController,
           decoration: InputDecoration(
             labelText: 'Amount',
-            labelStyle: GoogleFonts.bangers(),
+            labelStyle: GoogleFonts.bangers(color: Colors.black, fontSize: 20),
           ),
         ),
         Container(
           padding: EdgeInsets.all(20.0),
           child: RaisedButton(
+              elevation: 6,
               padding: EdgeInsets.all(15.0),
               child: Text(
-                'Edit item', style: GoogleFonts.bangers(),
+                'Edit item',
+                style: GoogleFonts.bangers(fontSize: 17),
               ),
               onPressed: () {
                 widget.currentItem.groceryItem = itemController.text;
@@ -107,7 +112,7 @@ class _NewItemState extends State<NewItem> {
           controller: itemController,
           decoration: InputDecoration(
             labelText: 'Item',
-            labelStyle: GoogleFonts.bangers(),
+            labelStyle: GoogleFonts.bangers(color: Colors.black, fontSize: 20),
           ),
           onSubmitted: (_) => submitData(),
         ),
@@ -115,15 +120,19 @@ class _NewItemState extends State<NewItem> {
           controller: amtController,
           decoration: InputDecoration(
             labelText: 'Amount',
-            labelStyle: GoogleFonts.bangers(),
+            labelStyle: GoogleFonts.bangers(color: Colors.black, fontSize: 20),
           ),
           onSubmitted: (_) => submitData(),
         ),
         Container(
           padding: EdgeInsets.all(20.0),
           child: RaisedButton(
+            elevation: 6,
             padding: EdgeInsets.all(15.0),
-            child: Text('Add item', style: GoogleFonts.bangers(),),
+            child: Text(
+              'Add item',
+              style: GoogleFonts.bangers(fontSize: 17),
+            ),
             onPressed: submitData,
           ),
         ),

@@ -34,6 +34,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   //Initiate bottom modal sheet
   void _startAddNewItem(BuildContext ctx) {
     showModalBottomSheet(
+      backgroundColor: secondaryTheme,
       context: ctx,
       builder: (_) {
         return GestureDetector(
@@ -62,6 +63,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
 
   void _startHandleEdit(BuildContext context, ItemModel item) {
     showModalBottomSheet(
+      backgroundColor: secondaryTheme,
       context: context,
       builder: (_) {
         return GestureDetector(
